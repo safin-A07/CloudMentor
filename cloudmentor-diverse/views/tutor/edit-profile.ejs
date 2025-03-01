@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+<h2 class="text-neon">Edit Profile</h2>
+<form action="/tutor/update-profile" method="POST" class="futuristic-card p-4">
+    <div class="mb-3"><input type="text" name="university" value="<%= user.university %>" class="form-control" placeholder="University"></div>
+    <div class="mb-3"><input type="text" name="teachingSubjects" value="<%= user.teachingSubjects.join(',') %>" class="form-control" placeholder="Teaching Subjects"></div>
+    <div class="mb-3"><input type="number" name="hourlyRate" value="<%= user.hourlyRate %>" class="form-control" placeholder="Hourly Rate" required></div>
+    <div class="mb-3"><textarea name="bio" class="form-control" placeholder="Bio"><%= user.bio %></textarea></div>
+    <button type="submit" class="btn btn-neon">Update</button>
+    <button type="submit" formaction="/tutor/delete-profile" class="btn btn-danger float-end">Delete Profile</button>
+</form>
+<%- include('../partials/footer') %>

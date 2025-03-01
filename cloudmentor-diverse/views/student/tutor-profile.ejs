@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<h2 class="text-neon"><%= tutor.name %>'s Profile</h2>
+<div class="futuristic-card p-4">
+    <p class="text-light">University: <%= tutor.university || 'N/A' %></p>
+    <p class="text-light">Subjects: <%= tutor.teachingSubjects.join(', ') %></p>
+    <p class="text-light">Rate: $<%= tutor.hourlyRate %>/hr</p>
+    <p class="text-light">Bio: <%= tutor.bio || 'No bio available' %></p>
+    <h3 class="text-light">Reviews</h3>
+    <ul class="list-group">
+        <% reviews.forEach(review => { %>
+            <li class="list-group-item futuristic-item">
+                <%= review.student.name %>: <%= review.rating %>/5 - <%= review.comment %>
+            </li>
+        <% }) %>
+    </ul>
+    <form action="/student/review" method="POST" class="mt-3">
+        <input type="hidden" name="tutorId" value="<%= tutor._id %>">
+        <div class="mb-3">
+            <select name="rating" class="form-control" required>
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option>
+            </select>
+        </div>
+        <div class="mb-3"><textarea name="comment" class="form-control" placeholder="Leave a comment"></textarea></div>
+        <button type="submit" class="btn btn-neon">Submit Review</button>
+    </form>
+</div>
+<%- include('../partials/footer') %>
