@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudMentor</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">CloudMentor</a>
+            <div class="navbar-links">
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <span class="navbar-user">Hi, <%= user.name %></span>
+                    <a href="/auth/logout" class="navbar-link">Logout</a>
+                <% } else { %>
+                    <a href="/auth/login" class="navbar-link">Login</a>
+                    <a href="/auth/register/student" class="navbar-link">Sign Up</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <% if (typeof user !== 'undefined' && user) { %>
+            <div class="notifications">
+                <% notifications.forEach(notification => { %>
+                    <div class="notification <%= notification.isRead ? 'notification-read' : 'notification-unread' %>">
+                        <p><%= notification.message %></p>
+                        <span class="notification-date"><%= notification.createdAt.toLocaleString() %></span>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
